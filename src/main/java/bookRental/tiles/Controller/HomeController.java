@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import bookRental.tiles.DAO.MybatisDAO;
 import bookRental.tiles.VO.bookList;
+import bookRental.tiles.VO.bookVO;
 
 /**
  * Handles requests for the application home page.
@@ -42,10 +43,20 @@ public class HomeController {
 		return "main.tiles";
 	}
 	
-	@RequestMapping("bInsert")
-	public String bInsert(){
+	@RequestMapping("insert.do")
+	public String bInsert(HttpServletRequest request, Model model){
+		System.out.println("잘들어온다");
+		MybatisDAO dao = sqlSession.getMapper(MybatisDAO.class);
 		
-		return "insert.tiles";
+		bookVO vo = new bookVO();
+		vo.setBname(request.getParameter("bName"));
+		vo.setAuth(request.getParameter("auth"));
+		vo.setPublisher(request.getParameter("publisher"));
+		vo.setPrice(Integer.parseInt(request.getParameter("price")));
+		
+		dao.insert(vo);
+		
+		return "redirect:/";
 	}
 	
 }

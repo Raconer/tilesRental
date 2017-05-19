@@ -1,8 +1,5 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-
-
- 
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+    
 <div id="myModal" class="modal">
 
   <!-- Modal content -->
@@ -11,7 +8,7 @@
       <span class="close">&times;</span>
       <h2 align="center">도서 추가</h2>
     </div>
-    <form action="/insert.do" onsubmit="return formCheck(this)">
+    <form action="insert.do" onsubmit="return formCheck(this)" method="post">
 	    <div class="modal-body">
 	     	<table style="height: 226px; width: 100%; ">
 				<tr>
@@ -41,15 +38,4 @@
 
 </div>
 <script type="text/javascript" src="script/modal.js"></script>
-
-<script>
-	function formCheck(obj){
-		if(!obj.bName.value || obj.bName.value.trim().length == 0) {//입력이 됬나 check
-			alert("책제목을 입력하시요");
-			obj.bName.value="";
-			obj.bName.focus();
-			return false;
-		}
-	}
-
-</script>
+<script type="text/javascript" src="script/formCheck.js"></script>

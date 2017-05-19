@@ -16,5 +16,9 @@
 	<select id="selectCount" resultType="INTEGER"> 
 		select count(*) from book
 	</select>
+	
+	<insert id="insert" parameterMap="bookRental.tiles.VO.bookVO">
+		 insert into BOOK(idx,bname,auth,price,rental,publisher) values(book_idx_seq.NEXTVAL,#{bname},#{auth},#{price},'0',#{publisher})
+	</insert>
 </mapper>
 
