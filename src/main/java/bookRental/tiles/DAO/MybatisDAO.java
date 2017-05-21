@@ -10,5 +10,6 @@ public interface MybatisDAO {
 	ArrayList<bookVO> selectList(int startNo, int endNo);
 	int selectCount();
 	void insert(bookVO vo);
+	bookVO selectByIdx(int i);
 
 }

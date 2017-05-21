@@ -4,17 +4,19 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/CSS/CSS.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
 
 <c:set var="value" value="0"/>
 
-<table>
+
+<table id="table">
 	<tr>
 		<td colspan="6" align="right">
 			<!-- <input type="button" value="Write" class="bBase bStyle1" onclick="location.href ='bInsert'" > -->
 			<button id="myBtn"  class="bBase bStyle1">write</button>
 		</td>
 	</tr>
-	<tr>
+	<tr id="title">
 		<td width="50px">번호 </td>	
 		<td width="500px">책 제목</td>	
 		<td width="200px">저자</td>	
@@ -24,7 +26,7 @@
 	</tr>
  	<c:forEach var="vo" items="${list.list}">
 		<c:set var="value" value="${value + 1}"/>
-		<tr>
+		<tr id="able">
 		 	<td>
 				${vo.idx}
 			</td>
@@ -47,7 +49,7 @@
 	</c:forEach> 
  	<c:if test="${value != 10}">
 		 	<c:forEach step="1" begin="${value}" end="10">
-		 		<tr>
+		 		<tr id="ta">
 		 			<td></td>
 		 			<td></td>
 		 			<td></td>
@@ -59,7 +61,15 @@
 	</c:if> 
 	<tr>
 		<td colspan="6">
-					<c:if test="${list.startPage > 1}">
+			<form name="itemForm" id="itemForm" method="post">
+				<input type="text" size="30" id="search"> 
+				<input type="button" id="itemSearch" value="검색">
+			</form>
+		</td>
+	</tr>
+	<tr>
+		<td colspan="6">
+						<c:if test="${list.startPage > 1}">
 							<input type="button" value="start" onclick="location.href='?page=1&item=${item}'"/>
 							<input type="button" value="&#060;&#060;"    onclick="location.href='?page=${list.startPage-1}&item=${item}'"/>
 						</c:if>
@@ -107,3 +117,4 @@
 		</td>
 	</tr>
 </table>
+<script type="text/javascript" src="./script/ajax.js"></script>

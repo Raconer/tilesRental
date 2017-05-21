@@ -20,5 +20,9 @@
 	<insert id="insert" parameterType="bookRental.tiles.VO.bookVO">
 		 insert into BOOK(idx,bname,auth,price,rental,publisher) values(book_idx_seq.NEXTVAL,#{bname},#{auth},#{price},'0',#{publisher})
 	</insert> 
+	
+	<select id="selectByIdx" parameterType="Integer" resultType="bookRental.tiles.VO.bookVO">
+		select * from BOOK where idx = #{param1}
+	</select>
 </mapper>
 
