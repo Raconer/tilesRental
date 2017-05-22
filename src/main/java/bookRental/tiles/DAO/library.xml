@@ -12,13 +12,29 @@
 		) where rnum >= #{param1}
 		]]>
 	</select>
+	<select id="selectItemList" resultType="bookRental.tiles.VO.bookVO" parameterType="java.util.Map">
+	<![CDATA[
+		select idx, bname, auth, price, rental, publisher from (
+  			 select rownum rnum, idx, bname, auth, price, rental, publisher from (
+					select * from BOOK m where bname like '%'|| #{item} || '%' ORDER BY idx ASC
+ 			) where rownum <= #{endNo} 
+		) where rnum >= #{startNo}
+		]]>
+	</select>
 	<!-- 전체 page수를 받아오는 select -->
 	<select id="selectCount" resultType="INTEGER"> 
 		select count(*) from book
+	</select>
+	<select id="selectItemCount" resultType="INTEGER" parameterType="String"> 
+		select count(*) from book where bname like'%'|| #{param1} || '%'
 	</select>
 	
 	<insert id="insert" parameterType="bookRental.tiles.VO.bookVO">
 		 insert into BOOK(idx,bname,auth,price,rental,publisher) values(book_idx_seq.NEXTVAL,#{bname},#{auth},#{price},'0',#{publisher})
 	</insert> 
+	
+	<select id="selectByIdx" parameterType="Integer" resultType="bookRental.tiles.VO.bookVO">
+		select * from BOOK where idx = #{param1}
+	</select>
 </mapper>
 
