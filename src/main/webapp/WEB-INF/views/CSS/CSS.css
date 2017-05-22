@@ -58,8 +58,9 @@ ul,li{
 	list-style: none;
 }
 .sCenter{
-	/* background-color: gray; */
-	max-width: 50%;
+	 background-color: gray; 
+	width: 1187px;
+	height: 100%;
 	}
 	
 .bBase {

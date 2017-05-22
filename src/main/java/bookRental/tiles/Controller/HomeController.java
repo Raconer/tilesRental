@@ -76,12 +76,11 @@ public class HomeController {
 		try {pageNo = Integer.parseInt(page);} catch (Exception e) {}
 		totalCount = dao.selectItemCount(search);
 		bookList list = new bookList(pageSize, totalCount, pageNo);
-		HashMap<Object, Object> map = new HashMap();
+		HashMap<Object, Object> map = new HashMap<Object, Object>();
 		map.put("startNo", list.getStartNo());
 		map.put("endNo", list.getEndNo());
 		map.put("item", search);
 		list.setList(dao.selectItemList(map));
-		model.addAttribute("lista","¹Þ¾Æ¶ù!!");
 		return  list;
 	}
 }

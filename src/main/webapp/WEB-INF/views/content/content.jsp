@@ -69,14 +69,14 @@
 	</tr>
 	<tr id="page">
 		<td colspan="6"><c:if test="${list.startPage > 1}">
-				<input type="button" value="start"	onclick="location.href='?page=1&item=${item}'" />
-				<input type="button" value="&#060;&#060;"onclick="location.href='?page=${list.startPage-1}&item=${item}'" />
+				<input type="button" value="start"	onclick="location.href='?page=1'" />
+				<input type="button" value="&#060;&#060;"onclick="location.href='?page=${list.startPage-1}'" />
 			</c:if> <c:if test="${list.startPage <= 1}">
 				<input type="button" value="start" disabled="disabled" />
 				<input type="button" value="&#060;&#060;" disabled="disabled" />
 			</c:if> <!-- currentPage가 1보다 크면 이전 페이지가 있다. --> 
 			<c:if test="${list.currentPage > 1}">
-				<input type="button" value="&#060;"	onclick="location.href='?page=${list.currentPage-1}&item=${item}'" />
+				<input type="button" value="&#060;"	onclick="location.href='?page=${list.currentPage-1}'" />
 			</c:if> 
 			<c:if test="${list.currentPage <= 1}">
 				<input type="button" value="&#060;" disabled="disabled" />
@@ -87,19 +87,20 @@
 					<input type="button" value="${i}" class="button1" disabled="disabled">
 				</c:if>
 				<c:if test="${list.currentPage != i}">
-					<input type="button" value="${i}" onclick="location.href='?page=${i}&item=${item}'" class="button">
+					<input type="button" value="${i}" onclick="location.href='?page=${i}'" class="button">
+					
 				</c:if>
 			</c:forEach> <!-- currentPage가 totalPage 보다 작으면 다음 페이지가 있다. --> 
 			
 			<c:if test="${list.currentPage < list.totalPage}">
-				<input type="button" value="&#62;"	onclick="location.href='?page=${list.currentPage+1}&item=${item}'" />
+				<input type="button" value="&#62;"	onclick="location.href='?page=${list.currentPage+1}'" />
 			</c:if> 
 			<c:if test="${list.currentPage >= list.totalPage}">
 				<input type="button" value="&#62;" disabled="disabled" />
 			</c:if> <!-- endPage가 totalPage 보다 작으면 다음 10 페이지가 있다. --> 
 			<c:if test="${list.endPage < list.totalPage}">
-				<input type="button" value="&#62;&#62;"	onclick="location.href='?page=${list.endPage+1}&item=${item}'" />
-				<input type="button" value="end" onclick="location.href='?page=${list.totalPage}&item=${item}'" />
+				<input type="button" value="&#62;&#62;"	onclick="location.href='?page=${list.endPage+1}'" />
+				<input type="button" value="end" onclick="location.href='?page=${list.totalPage}'" />
 			</c:if> <c:if test="${list.endPage >= list.totalPage}">
 				<input type="button" value="&#62;&#62;" disabled="disabled" />
 				<input type="button" value="end" disabled="disabled" />
@@ -108,3 +109,4 @@
 	</tr>
 </table>
 <script type="text/javascript" src="./script/ajax.js"></script>
+

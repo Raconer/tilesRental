@@ -2,4 +2,4 @@
     pageEncoding="UTF-8"%>
 <div class="sCenter">
 		footer	가운데
-	</div>
+</div>
