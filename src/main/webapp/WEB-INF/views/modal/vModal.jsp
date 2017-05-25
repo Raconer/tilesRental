@@ -1,12 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
     
 <div id="myModal" class="modal">
-
   <!-- Modal content -->
   <div class="modal-content">
     <div class="modal-header">
       <span class="close">&times;</span>
-      <h2 align="center">도서 추가</h2>
+      <h2 align="center">vModal</h2>
     </div>
     <form action="insert.do" onsubmit="return formCheck(this)" method="post">
 	    <div class="modal-body">
@@ -14,7 +13,6 @@
 				<tr>
 					<td>책 제목</td>
 					<td><input type="text" name="bName"></td>
-		
 				</tr>
 				<tr>
 					<td>저자</td>

@@ -4,20 +4,28 @@
 	"http://tiles.apache.org/dtds/tiles-config_2_1.dtd">
 	
 <tiles-definitions>
-	<definition	name="main-layout" template="/WEB-INF/views/index.jsp">
-		<put-attribute name="content" value=""/>
-		<put-attribute name="footer" value="/WEB-INF/views/footer/footer.jsp"/>
+
+	<definition	name="main-layout"	template="/WEB-INF/views/index.jsp">
+		<put-attribute name="content"	value=""/>
+		<put-attribute name="footer"	value="/WEB-INF/views/footer/footer.jsp"/>
 	</definition>
 
-	<definition name="main.tiles" extends="main-layout">
-		<put-attribute name="header" value="도서 목록"/>
-		<put-attribute name="content" value="/WEB-INF/views/content/content.jsp"/>
-		<put-attribute name="modal" value="/WEB-INF/views/modal/modal.jsp"/>	
-		
+	<definition name="main.tiles"	extends="main-layout">
+		<put-attribute name="header"	value="도서 목록"/>
+		<put-attribute name="content"	value="/WEB-INF/views/content/content.jsp"/>
+		<put-attribute name="modal"		value=""/>	
 	</definition>
 
-	<definition name="insert.tiles" extends="main-layout">
-		<put-attribute name="header" value="도서 추가"/>
-		<put-attribute name="content" value="/WEB-INF/views/content/bInsert.jsp"/>
+	<definition name="CUD.tiles"	extends="main-layout">
+		<put-attribute name="header"	value="책 관리 페이지"/>
+		<put-attribute name="content"	value="/WEB-INF/views/content/CUD.jsp"/>
+		<put-attribute name="modal"		value="/WEB-INF/views/modal/iModal.jsp"/>	
 	</definition>
+
+	<definition name="selectByIdx.tiles"	extends="main-layout">
+		<put-attribute name="header"	value="도서" />
+		<put-attribute name="content"	value="/WEB-INF/views/content/select.jsp"/>
+		<put-attribute name="modal"		value=""/>	
+	</definition>
+	
 </tiles-definitions>

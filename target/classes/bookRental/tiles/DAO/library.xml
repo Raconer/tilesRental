@@ -34,7 +34,14 @@
 	</insert> 
 	
 	<select id="selectByIdx" parameterType="Integer" resultType="bookRental.tiles.VO.bookVO">
-		select * from BOOK where idx = #{param1}
+		select * from book where idx = #{param1}
 	</select>
+	
+	<update id="rental" parameterType="Integer">
+		  update book set rental = '1' where idx =#{param1}
+	</update>
+	<delete id="delete" parameterType="Integer">
+		 delete from book where idx = #{idx}  and rental = 0
+	</delete>
 </mapper>
 

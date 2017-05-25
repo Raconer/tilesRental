@@ -1,96 +1,38 @@
 $(document).ready(function(){
-	/*$('#itemSearch').click(function(){*/ 
-	$(document).on("click","#itemSearch",function(){ 
-    	var search = $("#search").val(); 
- 		var page= 1;
- 		var p = $(this).attr('value');
- 		if($.isNumeric(p)){
-			page = p;	
-		}
-    	$.ajax({
-				type : "post",
-				url : "itemSearch",
-				dataType : "JSON",
-				data : ({"keyword" : "kry","search" : search, "paging" : page}),
-				success : function(data) {
-					var values = [];
-					var j = 0;
-					values = data.list;
-					
-					$("[id=able]").remove();
-					$("[id=ta]").remove();
-					
-				$.each(values.reverse(), function( index, value){	
-					$('#title').after("<tr id='able'>" +
-								"<td>"+value.idx+"</td>" +
-								"<td>"+value.bname+"</td>" +
-								"<td>"+value.auth+"</td>" +
-								"<td>"+value.publisher+"</td>" +
-								"<td align='right'>"+Number(value.price).toLocaleString('en') +"원"+"</td>" +
-								"<td>"+((value.rental == 1)?"대여중":"대여 가능")+"</td>" +
-							"</tr>");
-						j++;
-				});
-				if(j != 9){
-					for(j ; j<10;j++){
-						$('#searchTr').before("<tr id='able'>" +
-								"<td></td>" +
-								"<td></td>" +
-								"<td></td>" +
-								"<td></td>" +
-								"<td></td>" +
-								"<td></td>" +
-							"</tr>");
-					}
-				}
-				
-				$('#page').remove();
-				
-				var page = 0;
-				var pB = "";
-				if(data.startPage > 1){
-					pB +="<button id='itemSearch' value='"+1+"'>start</button> " +
-						"<button id='itemSearch' value='"+(data.startPage-1)+"'><<</button> ";
-				}else if(data.startPage <= 1){
-					pB += "<button id='itemSearch' disabled='disabled'>start</button> " +
-						"<button id='itemSearch' disabled='disabled'><<</button> ";
-				}
-				if(data.currentPage > 1){
-				 	pB += "<button id='itemSearch' value='"+(data.currentPage-1)+"'><</button> ";
-				}else if(data.currentPage <= 1){
-					pB += "<button id='itemSearch'  disabled='disabled' ><</button> ";
-				} 
-				for(var i =data.startPage; i<= data.endPage;i++){
-					if(data.currentPage == i){
-						pB += "<input type='button' value='"+i+"' class='button1' disabled='disabled'> ";	
-					}else if(data.currentPage != i){
-						pB += "<input type='button' id='itemSearch'  value='"+i+"' class='button'> ";
-					}
-				}					
-				if(data.currentPage < data.totalPage){
-					pB += "<button id='itemSearch' value='"+(data.currentPage+1)+"'>></button> ";
-				}else if(data.currentPage >= data.totalPage){
-					pB +="<button id='itemSearch'  disabled='disabled' >></button> ";
-				}
-				if(data.endPage < data.totalPage){
-					pB +="<button id='itemSearch' value='"+(data.endtPage+1)+"'>>></button> " +
-							"<button id='itemSearch' value='"+(data.totalPage)+"'>end</button>";
-				}else if(data.endPage >= data.totalPage){
-					pB += "<button id='itemSearch' disabled='disabled'>>></button> " +
-							"<button id='itemSearch' disabled='disabled'>end</button>";
-				}
-					
-				$('#searchTr').after("<tr id='page'>" +
-										"<td colspan='6'>"+
-											pB +
-										"</td>"+
-									"</tr>"
-				);
-			
+	$('#rental').click(function(){
+		var idx = $('#idx').val();
+		$.ajax({
+			type : "post",
+			url : "rental",
+			dataType : "JSON",
+			data : ({"idx" : idx}),
+			success : function(data) {
+				window.location.reload();
+				alert("대여 성공");
 			},error : function(data){
-				alert("에러");
-			},complete : function(data){		
+				alert("대여 실패");
+			},complete : function(data){
 			}
-    	});
+		});
+	});
+	$(document).on("click","#dBtn",function(){ 
+		var idx = $(this).attr('value');
+		$.ajax({
+			type : "post",
+			url : "dBtn",
+			dataType : "JSON",
+			data : ({"idx" : idx}),
+			success : function(data) {
+				if(data == true){
+					window.location.reload();
+					alert("삭제 성공");
+				}else{
+					alert("대여중인 항목은 삭제 할수없습니다.");
+				}
+			},error : function(data){
+				alert("삭제 실패");
+			},complete : function(data){
+			}
+		});
 	});
 });

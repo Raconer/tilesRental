@@ -15,5 +15,7 @@ public interface MybatisDAO {
 
 	int selectItemCount(String search);
 	ArrayList<bookVO> selectItemList(HashMap<Object, Object> map);
+	void rental(int idx);
+	boolean delete(int idx);
 
 }

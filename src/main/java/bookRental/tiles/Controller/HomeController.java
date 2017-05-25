@@ -29,7 +29,7 @@ public class HomeController {
 	
 	
 	/* 홈페이지 main 가장 먼저 출력되는 게시판 */
-	@RequestMapping(value="/",method=RequestMethod.GET)
+	@RequestMapping(value="/index",method=RequestMethod.GET)
 	public String main(HttpServletRequest request, Model model){
 		MybatisDAO dao = sqlSession.getMapper(MybatisDAO.class);
 		
@@ -37,19 +37,35 @@ public class HomeController {
 		int pageNo = 1;
 		int pageSize = 10;
 		int totalCount = 0;
+		String state = "";
+		String item = "";
 		
 		try {pageNo = Integer.parseInt(page);} catch (Exception e) {}
-		totalCount = dao.selectCount();
+		try {state = request.getParameter("state");} catch (Exception e) {}
+		try {item = request.getParameter("item");} catch (Exception e) {}
+		
+		if(item != null){
+			totalCount = dao.selectItemCount(item);
+		}else{
+			totalCount = dao.selectCount();
+		}
 		bookList list = new bookList(pageSize, totalCount, pageNo);
-		
-		list.setList(dao.selectList(list.getStartNo(), list.getEndNo()));
-		
+		if(item != null){
+			HashMap<Object, Object> map = new HashMap();
+			map.put("startNo", list.getStartNo());
+			map.put("endNo", list.getEndNo());
+			map.put("item", "%"+item+"%");
+			model.addAttribute("item", item);
+			list.setList(dao.selectItemList(map));
+		}else{
+			list.setList(dao.selectList(list.getStartNo(), list.getEndNo()));
+		}
 		model.addAttribute("list",list);
-		
+		model.addAttribute("state",state);		
 		return "main.tiles";
 	}
 	
-	@RequestMapping("insert.do")
+	@RequestMapping(value="/insert", method = RequestMethod.POST)
 	public String bInsert(HttpServletRequest request, Model model){
 		MybatisDAO dao = sqlSession.getMapper(MybatisDAO.class);
 		
@@ -61,26 +77,49 @@ public class HomeController {
 		
 		dao.insert(vo);
 		
-		return "redirect:/";
+		return "CUD.tiles";
 	}
 	
-	@RequestMapping(value="itemSearch", method=RequestMethod.POST)
+	@RequestMapping(value="/delete")
+	public String delete(Model model){
+		model.addAttribute("state","delete");
+		return "redirect:/index";
+	}
+	
+	@RequestMapping(value="/dBtn", method=RequestMethod.POST)
 	@ResponseBody
-	public bookList formOK(HttpServletRequest request,@RequestParam String keyword, @RequestParam String search,@RequestParam String paging, Model model) {
+	public boolean dBtn(@RequestParam int idx){
 		MybatisDAO dao = sqlSession.getMapper(MybatisDAO.class);
-		String page = paging;
+		boolean i = dao.delete(idx);
+		return i;
+	}
+	
+	@RequestMapping(value="/update")
+	public String update(Model model){
+		model.addAttribute("state","update");
+		return "redirect:/index";
+	}
+
+	@RequestMapping(value="/CUD")
+	public String CRD(HttpServletRequest request, Model model){
+		return "CUD.tiles";
+	}
+
+	@RequestMapping(value="/selectByIdx")
+	public String selectByIdx(HttpServletRequest request, Model model){
+		MybatisDAO dao = sqlSession.getMapper(MybatisDAO.class);
+		int idx = Integer.parseInt(request.getParameter("idx"));
+		bookVO vo = dao.selectByIdx(idx);
 		
-		int pageNo = 1;
-		int pageSize = 10;
-		int totalCount = 0;
-		try {pageNo = Integer.parseInt(page);} catch (Exception e) {}
-		totalCount = dao.selectItemCount(search);
-		bookList list = new bookList(pageSize, totalCount, pageNo);
-		HashMap<Object, Object> map = new HashMap<Object, Object>();
-		map.put("startNo", list.getStartNo());
-		map.put("endNo", list.getEndNo());
-		map.put("item", search);
-		list.setList(dao.selectItemList(map));
-		return  list;
+		model.addAttribute("vo",vo);
+		return "selectByIdx.tiles";
+	}
+	
+	@RequestMapping(value="/rental", method=RequestMethod.POST)
+	@ResponseBody
+	public boolean rental(@RequestParam int idx, Model model){
+		MybatisDAO dao = sqlSession.getMapper(MybatisDAO.class);
+		dao.rental(idx);
+		return true;
 	}
 }
