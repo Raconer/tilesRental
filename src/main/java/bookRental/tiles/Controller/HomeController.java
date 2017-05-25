@@ -109,6 +109,15 @@ public class HomeController {
 		model.addAttribute("vo",vo);
 		return "update.tiles";
 	}
+	@RequestMapping(value="/up")
+	public String up(HttpServletRequest request,Model model){
+		MybatisDAO dao = sqlSession.getMapper(MybatisDAO.class);
+		int idx = Integer.parseInt(request.getParameter("idx"));
+		model.addAttribute("state","update");
+		bookVO vo = dao.selectByIdx(idx);
+		model.addAttribute("vo",vo);
+		return "update.tiles";
+	}
 	
 	@RequestMapping(value="/CUD")
 	public String CRD(HttpServletRequest request, Model model){
@@ -132,4 +141,5 @@ public class HomeController {
 		dao.rental(idx);
 		return true;
 	}
+
 }
