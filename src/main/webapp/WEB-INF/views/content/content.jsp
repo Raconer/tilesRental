@@ -60,12 +60,9 @@
 			<td>		
 				${vo.rental == 1 ? "대여중" : "대여 가능"}
 			</td> 
-			<c:if test="${state == 'delete'}">
+			<c:if test="${td == 7}">
 				<td>
-			       <button value="${vo.idx}" <c:if >id="dBtn"</c:if> >${state}</button>
-			  
-					
-		
+			       <button value="${vo.idx}" <c:if test="${state eq 'delete' }">id="dBtn"</c:if> >${state}</button>
 				</td>
 			</c:if>
 		</tr>

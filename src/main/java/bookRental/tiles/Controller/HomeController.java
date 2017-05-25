@@ -94,12 +94,6 @@ public class HomeController {
 		return i;
 	}
 	
-	@RequestMapping(value="/update")
-	public String update(Model model){
-		model.addAttribute("state","update");
-		return "redirect:/index";
-	}
-
 	@RequestMapping(value="/CUD")
 	public String CRD(HttpServletRequest request, Model model){
 		return "CUD.tiles";
