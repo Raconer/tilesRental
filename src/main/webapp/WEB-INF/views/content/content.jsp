@@ -62,7 +62,8 @@
 			</td> 
 			<c:if test="${td == 7}">
 				<td>
-			       <button value="${vo.idx}" <c:if test="${state eq 'delete' }">id="dBtn"</c:if> >${state}</button>
+			       <button value="${vo.idx}" <c:if test="${state eq 'delete' }">id="dBtn"</c:if>
+			        <c:if test="${state eq 'update' }"> onclick="location.href='uBtn?idx=${vo.idx}'" </c:if> >${state}</button>
 				</td>
 			</c:if>
 		</tr>

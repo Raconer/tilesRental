@@ -94,6 +94,22 @@ public class HomeController {
 		return i;
 	}
 	
+	@RequestMapping(value="/update")
+	public String update(Model model){
+		model.addAttribute("state","update");
+		return "redirect:/index";
+	}
+
+	@RequestMapping(value="/uBtn")
+	public String uBtn(HttpServletRequest request,Model model){
+		MybatisDAO dao = sqlSession.getMapper(MybatisDAO.class);
+		int idx = Integer.parseInt(request.getParameter("idx"));
+		model.addAttribute("state","update");
+		bookVO vo = dao.selectByIdx(idx);
+		model.addAttribute("vo",vo);
+		return "update.tiles";
+	}
+	
 	@RequestMapping(value="/CUD")
 	public String CRD(HttpServletRequest request, Model model){
 		return "CUD.tiles";

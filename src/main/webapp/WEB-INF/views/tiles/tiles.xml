@@ -27,5 +27,11 @@
 		<put-attribute name="content"	value="/WEB-INF/views/content/select.jsp"/>
 		<put-attribute name="modal"		value=""/>	
 	</definition>
+
+	<definition name="update.tiles"	extends="main-layout">
+		<put-attribute name="header"	value="도서" />
+		<put-attribute name="content"	value="/WEB-INF/views/content/update.jsp"/>
+		<put-attribute name="modal"		value=""/>	
+	</definition>
 	
 </tiles-definitions>
