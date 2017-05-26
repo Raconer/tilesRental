@@ -1,6 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 
-
 <style>
 	.select{
 		width: 50%;
@@ -19,7 +18,7 @@
 				<input type="hidden" value="${vo.idx}" name="idx">
 			</td>
 			<td>책 제목</td>
-			<td><input type="text" value="${vo.bname}" name="bname"></td>
+			<td><input type="text" value="${vo.bname}" name="bName"></td>
 		</tr>
 		<tr id="title">
 

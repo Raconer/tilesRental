@@ -4,13 +4,12 @@
 	"http://tiles.apache.org/dtds/tiles-config_2_1.dtd">
 	
 <tiles-definitions>
-
+	<!-- 전체 틀이 되는 template -->
 	<definition	name="main-layout"	template="/WEB-INF/views/index.jsp">
 		<put-attribute name="content"	value=""/>
 		<put-attribute name="footer"	value="/WEB-INF/views/footer/footer.jsp"/>
-		<put-attribute name="script"	value="/WEB-INF/views/script/script.js"/>
 	</definition>
-
+	
 	<definition name="main.tiles"	extends="main-layout">
 		<put-attribute name="header"	value="도서 목록"/>
 		<put-attribute name="content"	value="/WEB-INF/views/content/content.jsp"/>
@@ -32,6 +31,12 @@
 	<definition name="update.tiles"	extends="main-layout">
 		<put-attribute name="header"	value="도서" />
 		<put-attribute name="content"	value="/WEB-INF/views/content/update.jsp"/>
+		<put-attribute name="modal"		value=""/>
+	</definition>
+
+	<definition name="rental.tiles"	extends="main-layout">
+		<put-attribute name="header"	value="도서" />
+		<put-attribute name="content"	value="/WEB-INF/views/content/rental.jsp"/>
 		<put-attribute name="modal"		value=""/>
 	</definition>
 	

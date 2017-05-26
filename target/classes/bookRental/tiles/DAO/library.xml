@@ -2,7 +2,8 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org/DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 		
 <mapper namespace="bookRental.tiles.DAO.MybatisDAO">
-	<!-- page 별 List select -->
+
+	<!-- 총 책 List -->
 	<select id="selectList" resultType="bookRental.tiles.VO.bookVO" parameterType="Integer">
 		<![CDATA[
 		select * from(
@@ -12,6 +13,8 @@
 		) where rnum >= #{param1}
 		]]>
 	</select>
+	
+	<!-- 검색 했을때 List -->
 	<select id="selectItemList" resultType="bookRental.tiles.VO.bookVO" parameterType="java.util.Map">
 	<![CDATA[
 		select idx, bname, auth, price, rental, publisher from (
@@ -21,27 +24,56 @@
 		) where rnum >= #{startNo}
 		]]>
 	</select>
-	<!-- 전체 page수를 받아오는 select -->
+	
+	<!-- 대여한 책 List -->
+	<select id="selectRentalList" resultType="bookRental.tiles.VO.bookVO" parameterType="Integer">
+		<![CDATA[
+		select * from(
+			select rownum rnum,idx, bname, auth, price, rental, publisher  from(
+				select * from BOOK where rental = 1  ORDER BY IDX ASC
+			)where rownum <= #{param2}
+		) where rnum >= #{param1}
+		]]>
+	</select>
+	
+	<!-- 책 전체 갯수 -->
 	<select id="selectCount" resultType="INTEGER"> 
 		select count(*) from book
 	</select>
+	<!-- 검색한 책의 전체 갯수 -->
 	<select id="selectItemCount" resultType="INTEGER" parameterType="String"> 
 		select count(*) from book where bname like'%'|| #{param1} || '%'
 	</select>
+	<!-- 대여한 책의 전체 갯수 -->
+	<select id="selectRentalCount" resultType="INTEGER"> 
+		select count(*) from book where rental = 1
+	</select>
 	
-	<insert id="insert" parameterType="bookRental.tiles.VO.bookVO">
-		 insert into BOOK(idx,bname,auth,price,rental,publisher) values(book_idx_seq.NEXTVAL,#{bname},#{auth},#{price},'0',#{publisher})
-	</insert> 
-	
+	<!-- 책 한권의 정보를 읽기 -->
 	<select id="selectByIdx" parameterType="Integer" resultType="bookRental.tiles.VO.bookVO">
 		select * from book where idx = #{param1}
 	</select>
 	
-	<update id="rental" parameterType="Integer">
-		  update book set rental = '1' where idx =#{param1}
-	</update>
+	<!-- 책 추가 -->
+	<insert id="insert" parameterType="bookRental.tiles.VO.bookVO">
+		 insert into BOOK(idx,bname,auth,price,rental,publisher) values(book_idx_seq.NEXTVAL,#{bname},#{auth},#{price},'0',#{publisher})
+	</insert> 
+	<!-- 책 삭제 -->
 	<delete id="delete" parameterType="Integer">
 		 delete from book where idx = #{idx}  and rental = 0
 	</delete>
+	<!-- 책 수정 -->
+	<update id="update" parameterType="bookRental.tiles.VO.bookVO">
+		 update book set bname = #{bname},auth=#{auth},price=#{price},publisher=#{publisher} where idx = #{idx}
+	</update>
+	
+	<!-- 책 대여 하기 -->
+	<update id="rental" parameterType="Integer">
+		  update book set rental = '1' where idx =#{param1}
+	</update>
+	<!-- 책 반납 하기 -->
+	<update id="bReturn" parameterType="Integer">
+		  update book set rental = '0' where idx =#{param1}
+	</update>
 </mapper>
 

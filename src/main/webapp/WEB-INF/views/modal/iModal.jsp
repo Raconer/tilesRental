@@ -35,5 +35,7 @@
   </div>
 
 </div>
-<script type="text/javascript" src="script/modal.js"></script>
-<script type="text/javascript" src="script/formCheck.js"></script>
+
+
+
+ 

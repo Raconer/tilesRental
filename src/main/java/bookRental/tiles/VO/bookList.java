@@ -3,15 +3,15 @@ package bookRental.tiles.VO;
 import java.util.ArrayList;
 
 public class bookList {
-	private ArrayList<bookVO> list;
-	private int totalCount;
-	private int totalPage;
-	private int currentPage;
-	private int pageSize;
-	private int startNo;
-	private int endNo;
-	private int startPage;
-	private int endPage;
+	private ArrayList<bookVO> list;	//	계산된 페이지 별로 가져온 책List
+	private int totalCount;			//	책의 총갯수
+	private int totalPage;			//	리스트의 갯수로 나눈 page수
+	private int currentPage;		//	현재 페이지 번호
+	private int pageSize;			//	화면당 불러올 리스트 갯수
+	private int startNo;			//	시작 번호
+	private int endNo;				//	총 번호
+	private int startPage;			//	페이지 시작 번호
+	private int endPage;			//	페이지 마지막 번호 (ex.1~9,10~19,...)
 	
 	public bookList(int pageSize,int totalCount,int currentPage) {
 		this.pageSize = pageSize;

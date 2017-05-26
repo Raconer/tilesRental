@@ -2,12 +2,12 @@ package bookRental.tiles.VO;
 
 public class bookVO {
 	
-	private int idx;
-	private String bname;
-	private String auth;
-	private String publisher;
-	private int price;
-	private String rental;
+	private int idx;			// PK
+	private String bname;		// 책이름
+	private String auth;		// 저자
+	private String publisher;	// 출판사
+	private int price;			// 가격
+	private String rental;		// 대여 여부
 		
 	public bookVO() {
 
@@ -50,10 +50,4 @@ public class bookVO {
 	public void setRental(String rental) {
 		this.rental = rental;
 	}
-	@Override
-	public String toString() {
-		return "bookVO [idx=" + idx + ", bname=" + bname + ", auth=" + auth + ", publisher=" + publisher + ", price="
-				+ price + ", rental=" + rental + "]";
-	}
-	
 }

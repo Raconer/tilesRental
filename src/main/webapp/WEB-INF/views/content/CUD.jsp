@@ -1,7 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 
-<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/CSS/CSS.css">
-
 <div style="text-align: left;"		class="cudMenu fbtn" id="myBtn">
 	insert
 </div>

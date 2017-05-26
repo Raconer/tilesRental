@@ -15,6 +15,25 @@ $(document).ready(function(){
 			}
 		});
 	});
+	
+	$(document).on("click","#bReturn",function(){ 
+		var idx = $(this).attr('value');
+		$.ajax({
+			type : "post",
+			url : "bReturn",
+			dataType : "JSON",
+			data : ({"idx" : idx}),
+			success : function(data) {
+				if(data == true){
+					window.location.reload();
+					alert("반납 성공");
+				}
+			},error : function(data){
+				alert("반납 실패");
+			},complete : function(data){
+			}
+		});
+	});
 	$(document).on("click","#dBtn",function(){ 
 		var idx = $(this).attr('value');
 		$.ajax({

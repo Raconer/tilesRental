@@ -1,13 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
-<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/CSS/CSS.css">
+
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
-
 <c:set var="value" value="0"/>
-
 <c:choose>
     <c:when test="${state eq 'delete' || state eq 'update'}">
         <c:set var="td" value="7"/>
@@ -16,9 +12,7 @@
        <c:set var="td" value="6"/>
     </c:otherwise>
 </c:choose>
-
 <table id="table">
-	
 	<tr>
 		<td colspan="${td}" align="right">
 		<!-- 	<button id="myBtn"  class="bBase bStyle1">write</button> -->
