@@ -28,7 +28,7 @@ td{
 }
 .center{
 	width: 1187px; 
-	height: 716px; 
+	height: 710px; 
 	/* background-color: blue;  */
 	margin: 80px auto;
 }
@@ -46,15 +46,16 @@ td{
   	
 }
 .footer{
-	height:300px; 
+	height:310px; 
 	width: 100%; 
+	min-width: 1187px;
 	background-color: #7d91b5;
 	display: flex;
 	align-items: center;
   	justify-content: center;
 	
 }
-.text{margin:30%;}
+.text{margin:42% auto;}
 ul,li{
 	list-style: none;
 }

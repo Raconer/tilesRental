@@ -16,7 +16,7 @@
 			책 관리
 		</div>
 	</div>
-	<div class="fMenu fbtn" onclick="location.href='File'" >
+	<div class="fMenu fbtn" onclick="location.href='File'">
 		<div class="text">
 			책 대여 기록 저장
 		</div>

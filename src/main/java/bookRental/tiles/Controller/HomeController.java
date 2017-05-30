@@ -383,7 +383,6 @@ public class HomeController {
 	    File file = null;
 	    boolean skip = false;
 	    String client = "";
-	 
 	    try{
 	        // 파일을 읽어 스트림에 담기
 	        try{
@@ -397,10 +396,11 @@ public class HomeController {
 	        response.reset();
 	        response.setContentType("application/octet-stream");
 	        response.setHeader("Content-Description", "JSP Generated Data");
+	        
 	        if(!skip){
 	        	// IE
-	            if(client.indexOf("MSIE") != -1){
-	                response.setHeader ("Content-Disposition", "attachment; filename="+new String(orgfilename.getBytes("KSC5601"),"ISO8859_1"));
+	            if(client.indexOf("WOW64") != -1 || client.indexOf("Edge") != -1){
+	            	  response.setHeader ("Content-Disposition", "attachment; filename="+new String(orgfilename.getBytes("KSC5601"),"ISO8859_1"));
 	            }else{
 	                // 한글 파일명 처리
 	                orgfilename = new String(orgfilename.getBytes("utf-8"),"iso-8859-1");
@@ -416,7 +416,6 @@ public class HomeController {
 	            }
 	        }else{
 	            response.setContentType("text/html;charset=UTF-8");
-	          
 	        }
 	        in.close();
 	        os.close();
