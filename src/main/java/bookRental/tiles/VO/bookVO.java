@@ -50,4 +50,10 @@ public class bookVO {
 	public void setRental(String rental) {
 		this.rental = rental;
 	}
+	
+	@Override
+	public String toString() {
+		return "idx=" + idx + ", bname=" + bname + ", auth=" + auth + ", publisher=" + publisher + ", price="+ price;
+	}
+	
 }

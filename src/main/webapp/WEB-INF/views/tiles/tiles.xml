@@ -39,5 +39,10 @@
 		<put-attribute name="content"	value="/WEB-INF/views/content/rental.jsp"/>
 		<put-attribute name="modal"		value=""/>
 	</definition>
-	
+
+	<definition name="rentalList.tiles"	extends="main-layout">
+		<put-attribute name="header"	value="책 관리 페이지"/>
+		<put-attribute name="content"	value="/WEB-INF/views/content/rentalList.jsp"/>
+		<put-attribute name="modal"		value="/WEB-INF/views/modal/pModal.jsp"/>
+	</definition>	
 </tiles-definitions>

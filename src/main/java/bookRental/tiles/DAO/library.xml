@@ -64,7 +64,7 @@
 	</delete>
 	<!-- 책 수정 -->
 	<update id="update" parameterType="bookRental.tiles.VO.bookVO">
-		 update book set bname = #{bname},auth=#{auth},price=#{price},publisher=#{publisher} where idx = #{idx}
+		 update book set bname = #{bname}, auth = #{auth}, price = #{price}, publisher = #{publisher} where idx = #{idx}
 	</update>
 	
 	<!-- 책 대여 하기 -->
@@ -75,5 +75,26 @@
 	<update id="bReturn" parameterType="Integer">
 		  update book set rental = '0' where idx =#{param1}
 	</update>
+	
+	<!-- 책 대여 리스트 추가 -->
+	<insert id="rentalList" parameterType="Integer">
+		  insert into rentalbook(idx,book) values(rentalbook_idx_seq.NEXTVAL,#{param1})
+	</insert>
+
+	<!-- 책 반납시 책 대여 리스트 반납시간 추가 -->
+	<update id="RBList" parameterType="Integer">
+		 update rentalbook set bdate = sysdate, overrental = #{param2} where book = #{param1} and rownum = 1
+	</update>
+	
+	<!-- 책 반납시 연체 를 비교 하기 위해 불러오기 -->
+	<!-- select rdate + 5/(24*60)  from rentalbook where book = #{param1} and bdate is null -->
+	<select id="selectDate" resultType="java.util.Date" parameterType="Integer">
+		select rdate   from rentalbook where book = #{param1} and bdate is null
+		
+	</select>
+	
+	<select id="rentalRecord" resultType="bookRental.tiles.VO.rentalVO">
+		select * from rentalbook order by book
+	</select>
 </mapper>
 

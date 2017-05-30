@@ -1,9 +1,11 @@
 package bookRental.tiles.DAO;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 
 import bookRental.tiles.VO.bookVO;
+import bookRental.tiles.VO.rentalVO;
 
 
 public interface MybatisDAO {
@@ -25,4 +27,11 @@ public interface MybatisDAO {
 	
 	void rental(int idx);											//	책 대여 하기
 	boolean bReturn(int idx);										//	책 반납 하기
+	
+	void rentalList(int idx);										//	대여 기록 리스트 추가
+	void RBList(int idx, int r);									//	반납시 대여 기록 리스트 반납 시간 Update
+	Date selectDate(int idx);										//	연체 시간을 알기 위해 기존의 대여시간에 +(연체기준 시간) 을 하여 출력
+	
+	ArrayList<rentalVO> rentalRecord();								//	대여 기록 
+	
 }

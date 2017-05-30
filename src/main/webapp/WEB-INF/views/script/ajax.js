@@ -1,5 +1,5 @@
 $(document).ready(function(){
-	$('#rental').click(function(){
+	$(document).on("click","#rental",function(){ 
 		var idx = $('#idx').val();
 		$.ajax({
 			type : "post",
@@ -15,7 +15,6 @@ $(document).ready(function(){
 			}
 		});
 	});
-	
 	$(document).on("click","#bReturn",function(){ 
 		var idx = $(this).attr('value');
 		$.ajax({
